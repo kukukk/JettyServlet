@@ -40,28 +40,25 @@
 
 package org.glassfish.jersey.server.internal.monitoring;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
-
+import org.glassfish.hk2.api.PerLookup;
+import org.glassfish.hk2.api.TypeLiteral;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.internal.inject.ReferencingFactory;
 import org.glassfish.jersey.internal.util.collection.Ref;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.internal.LocalizationMessages;
-import org.glassfish.jersey.server.internal.monitoring.jmx.MBeanExposer;
 import org.glassfish.jersey.server.monitoring.ApplicationInfo;
 import org.glassfish.jersey.server.monitoring.MonitoringStatistics;
 import org.glassfish.jersey.server.monitoring.MonitoringStatisticsListener;
 
-import org.glassfish.hk2.api.PerLookup;
-import org.glassfish.hk2.api.TypeLiteral;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.inject.Singleton;
+import javax.ws.rs.core.Feature;
+import javax.ws.rs.core.FeatureContext;
 
 /**
  * Feature that enables calculating of {@link MonitoringStatistics monitoring statistics} and
@@ -158,12 +155,6 @@ public final class MonitoringFeature implements Feature {
                     bind(StatisticsListener.class).to(MonitoringStatisticsListener.class).in(Singleton.class);
                 }
             });
-        }
-
-        if (mBeansEnabled) {
-            // instance registration is needed here as MBeanExposer needs to be a singleton so that
-            // one instance handles listening to events of MonitoringStatisticsListener and ContainerLifecycleListener
-            context.register(new MBeanExposer());
         }
 
         return monitoringEnabled;
