@@ -39,18 +39,16 @@
  */
 package org.glassfish.jersey.message.internal;
 
-import java.util.Map;
-
-import javax.ws.rs.RuntimeType;
-import javax.ws.rs.ext.MessageBodyReader;
-import javax.ws.rs.ext.MessageBodyWriter;
-
-import javax.inject.Singleton;
-
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.internal.ServiceFinderBinder;
 import org.glassfish.jersey.spi.HeaderDelegateProvider;
 
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import java.util.Map;
+
+import javax.inject.Singleton;
+import javax.ws.rs.RuntimeType;
+import javax.ws.rs.ext.MessageBodyReader;
+import javax.ws.rs.ext.MessageBodyWriter;
 
 /**
  * Binding definitions for the default set of message related providers (readers,
@@ -99,7 +97,6 @@ public final class MessagingBinders {
             bindSingletonWorker(InputStreamProvider.class);
             bindSingletonWorker(BasicTypesMessageProvider.class);
             bindSingletonWorker(ReaderProvider.class);
-            bindSingletonWorker(RenderedImageProvider.class);
             bindSingletonWorker(StringMessageProvider.class);
 
             // Message body readers
