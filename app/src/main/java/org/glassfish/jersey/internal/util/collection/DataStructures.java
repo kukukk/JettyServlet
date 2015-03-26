@@ -39,6 +39,8 @@
  */
 package org.glassfish.jersey.internal.util.collection;
 
+import org.glassfish.jersey.internal.util.JdkVersion;
+
 import java.security.AccessController;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
@@ -49,8 +51,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.glassfish.jersey.internal.util.JdkVersion;
 
 /**
  * Utility class, which tries to pickup the best collection implementation depending
@@ -72,9 +72,7 @@ public final class DataStructures {
             final JdkVersion jdkVersion = JdkVersion.getJdkVersion();
             final JdkVersion minimumVersion = JdkVersion.parseVersion("1.7.0");
 
-            className = (minimumVersion.compareTo(jdkVersion) <= 0)
-                    ? "java.util.concurrent.LinkedTransferQueue"
-                    : "org.glassfish.jersey.internal.util.collection.LinkedTransferQueue";
+            className = "java.util.concurrent.LinkedTransferQueue";
 
             c = getAndVerify(className);
             Logger.getLogger(DataStructures.class.getName()).log(Level.FINE, "USING LTQ class:{0}", c);
@@ -158,9 +156,7 @@ public final class DataStructures {
      * @return the map.
      */
     public static <K, V> ConcurrentMap<K, V> createConcurrentMap() {
-        return JdkVersion.getJdkVersion().isUnsafeSupported()
-                ? new ConcurrentHashMapV8<K, V>()
-                : new ConcurrentHashMap<K, V>();
+        return new ConcurrentHashMap<K, V>();
     }
 
     /**
@@ -178,9 +174,7 @@ public final class DataStructures {
      */
     public static <K, V> ConcurrentMap<K, V> createConcurrentMap(
             final Map<? extends K, ? extends V> map) {
-        return JdkVersion.getJdkVersion().isUnsafeSupported()
-                ? new ConcurrentHashMapV8<K, V>(map)
-                : new ConcurrentHashMap<K, V>(map);
+        return new ConcurrentHashMap<K, V>(map);
     }
 
     /**
@@ -202,9 +196,7 @@ public final class DataStructures {
      */
     public static <K, V> ConcurrentMap<K, V> createConcurrentMap(
             final int initialCapacity) {
-        return JdkVersion.getJdkVersion().isUnsafeSupported()
-                ? new ConcurrentHashMapV8<K, V>(initialCapacity)
-                : new ConcurrentHashMap<K, V>(initialCapacity);
+        return new ConcurrentHashMap<K, V>(initialCapacity);
     }
 
     /**
@@ -235,8 +227,6 @@ public final class DataStructures {
     public static <K, V> ConcurrentMap<K, V> createConcurrentMap(
             final int initialCapacity, final float loadFactor,
             final int concurrencyLevel) {
-        return JdkVersion.getJdkVersion().isUnsafeSupported()
-                ? new ConcurrentHashMapV8<K, V>(initialCapacity, loadFactor, concurrencyLevel)
-                : new ConcurrentHashMap<K, V>(initialCapacity, loadFactor, concurrencyLevel);
+        return new ConcurrentHashMap<K, V>(initialCapacity, loadFactor, concurrencyLevel);
     }
 }
