@@ -99,7 +99,6 @@
     <orderEntry type="library" exported="" name="jetty-webapp-9.2.10.v20150310" level="project" />
     <orderEntry type="library" exported="" name="jaxb-api-2.2.7" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
-    <orderEntry type="library" exported="" name="javax.servlet-api-3.0.1" level="project" />
     <orderEntry type="library" exported="" name="jetty-servlet-9.2.10.v20150310" level="project" />
     <orderEntry type="library" exported="" name="jetty-xml-9.2.10.v20150310" level="project" />
     <orderEntry type="library" exported="" name="javassist-3.18.1-GA" level="project" />
