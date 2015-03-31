@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("myresource")
+@Path("/")
 public class MyResource {
 
     /**
@@ -16,7 +16,7 @@ public class MyResource {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
+    public String getMsg() {
         return "Got it!";
     }
 }
